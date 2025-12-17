@@ -10,7 +10,7 @@
 <meta name="author"
    content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 <meta name="generator" content="Astro v5.13.2">
-<title>JSP템플릿</title>
+<title>맵 연습</title>
 <link rel="shortcut icon" href="http://192.168.10.68/jsp_prj/common/images/favicon.ico">
 
 <script src="http://192.168.10.68/jsp_prj/common/js/color-modes.js"></script>
