@@ -58,6 +58,10 @@ public class RestaurantDAO {
 				rDTO.setRest_name(rs.getString("rest_name"));
 				rDTO.setMenu(rs.getString("menu"));
 				rDTO.setLat(rs.getDouble("lat"));
+				rDTO.setLng(rs.getDouble("lng"));
+				rDTO.setInput_date(rs.getDate("input_date"));
+				
+				list.add(rDTO);
 			} // end while
 
 		} finally {
@@ -67,8 +71,28 @@ public class RestaurantDAO {
 		return list;
 	}//selectAllRestaurant
 	
-	public void insertRestaurant(RestaurantDTO rDTO) {
-		
-	}
+	public void insertRestaurant(RestaurantDTO rDTO) throws SQLException {
+		DbConn dbCon = DbConn.getInstance("jdbc/dbcp");
 
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = dbCon.getConn();
+			String insertBoard = "insert into restaurant(rest_num, id, rest_name, menu, info, lat, lng) values( seq_board.nextval,?,?,?,?,?,?)";
+			pstmt = con.prepareStatement(insertBoard);
+			pstmt.setString(1, rDTO.getId());
+			pstmt.setString(2, rDTO.getRest_name());
+			pstmt.setString(3, rDTO.getMenu());
+			pstmt.setString(4, rDTO.getInfo());
+			pstmt.setDouble(5, rDTO.getLat());
+			pstmt.setDouble(6, rDTO.getLng());
+
+			pstmt.executeUpdate();
+
+		} finally {
+			dbCon.dbClose(rs, pstmt, null);
+		} // end finally
+	}
 }
